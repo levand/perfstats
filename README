@@ -1,0 +1,13 @@
+# perfstats
+
+JMeter performance
+
+## Usage
+
+To compile, make sure you have a JMETER_HOME environment variable pointing to the JMeter installation directory
+
+## License
+
+Copyright (C) 2011 
+
+Distributed under the Eclipse Public License, the same as Clojure.
