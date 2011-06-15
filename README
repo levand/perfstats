@@ -1,8 +1,10 @@
 # perfstats
 
-JMeter performance
+JMeter pluging for analyzing results using Clojure
 
 ## Usage
+
+Still a work in progress, documentation is not yet complete
 
 To compile, make sure you have a JMETER_HOME environment variable pointing to the JMeter installation directory
 
