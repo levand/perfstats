@@ -1,5 +1,6 @@
 (ns perfstats.PerfstatVisualizer
-  (:require [perfstats.cljrunner :as cljrunner])
+  (:require [perfstats.cljrunner :as cljrunner]
+            [clojure.string :as s])
   (:import (java.awt BorderLayout Color Component Dimension Image)
            (javax.swing BorderFactory Box JComponent JLabel JPanel JTextField)
            (javax.swing.border BevelBorder Border EmptyBorder)
@@ -23,6 +24,14 @@
 (def logger (LoggingManager/getLoggerFor "perfstats.PerfstatVisualizer"))
 (def label "Perfstats")
 
+(defn parse-http-headers
+  "Parses HTTP headers"
+  [header-str]
+  (into {}
+        (filter #(= 2 (count %))
+                (map (fn [h] (s/split h #": " 2))
+                     (s/split header-str #"\n")))))
+
 (defprotocol Sample
   (to-map [sample] "Loads a sample into a map"))
 
@@ -37,7 +46,8 @@
                     :monitor (.isMonitor sample)
                     :group-threads (.getGroupThreads sample)
                     :thread-name (.getThreadName sample)
-                    :latency (.getLatency sample)}))
+                    :latency (.getLatency sample)
+                    :headers (parse-http-headers (.getResponseHeaders sample))}))
 
 (defn add-sample
   "Given a full state map, adds a sample to it"
@@ -78,4 +88,4 @@
   (.setLayout this (BorderLayout.))
   (.setBorder this (EmptyBorder. 10 10 5 10))
   (.addSuper this (.makeTitlePanelSuper this) BorderLayout/NORTH)
-  (.addSuper this (cljrunner/panel)))
+  (.addSuper this (cljrunner/panel (.state this))))
