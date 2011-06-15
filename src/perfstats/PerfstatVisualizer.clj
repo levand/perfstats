@@ -37,13 +37,15 @@
 
 (extend-type SampleResult
   Sample
-  (to-map [sample] {:start-time (.getStartTime sample)
+  (to-map [sample] {
+                    :start-time (.getStartTime sample)
                     :end-time (.getEndTime sample)
                     :label (.getSampleLabel sample)
                     :successful (.isSuccessful sample)
                     :code (.getResponseCode sample)
                     :url (.getUrlAsString sample)
                     :monitor (.isMonitor sample)
+                    :size (.getBytes sample)
                     :group-threads (.getGroupThreads sample)
                     :thread-name (.getThreadName sample)
                     :latency (.getLatency sample)
@@ -80,7 +82,6 @@
   label)
 
 (defn -clearData [this]
-  (println "current state:" @(.state this))
   (println "clear"))
 
 (defn -init [this]

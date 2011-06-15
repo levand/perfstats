@@ -6,10 +6,9 @@
 
 (pp/pprint (first user/*samples*))
 
-
 (with-data samples
   (view (scatter-plot ($ :start-time) ($ :latency)))
-  (view (histogram ($ :latency))))
+  (view (histogram ($ :latency) :nbins 50)))
 
 
 
