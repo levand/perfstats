@@ -60,15 +60,14 @@
 
 (defn -init-state []
   "Initializes our class's state"
-  [[] (ref {:samples []})])
+  [[] (atom {:samples []})])
 
 ;; defined in :methods
 (defn -add
   "Method called when a sample is added"
   [this ^SampleResult result]
-  (.info logger (str "sample:" (class result)))
-  (dosync
-   (commute (.state this) add-sample (to-map result))))
+  ; (.info logger (str "sample:" (class result)))
+  (swap! (.state this) add-sample (to-map result)))
 
 ;; defined in getstat
 (defn -getStaticLabel
@@ -82,7 +81,9 @@
   label)
 
 (defn -clearData [this]
-  (println "clear"))
+  (println "clearing all records")
+  (reset! (.state this) {:samples []}))
+
 
 (defn -init [this]
   (.info logger "initialized perfstat!")
