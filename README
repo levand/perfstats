@@ -1,15 +1,11 @@
 # perfstats
 
-JMeter pluging for analyzing results using Clojure
+JMeter plugin for analyzing results using Clojure and Incanter
 
-## Usage
+## Installation
 
-Still a work in progress, documentation is not yet complete
+Copy perfstats-1.0.0-SNAPSHOT.jar to JMETER_HOME/lib/ext.
 
-To compile, make sure you have a JMETER_HOME environment variable pointing to the JMeter installation directory
+## Compilation
 
-## License
-
-Copyright (C) 2011 
-
-Distributed under the Eclipse Public License, the same as Clojure.
+To compile, make sure you have a JMETER_HOME environment variable pointing to your JMeter installation directory - JMeter's jars are required to build
